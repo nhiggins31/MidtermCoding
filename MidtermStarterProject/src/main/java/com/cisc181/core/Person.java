@@ -2,7 +2,8 @@ package com.cisc181.core;
 
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /*
  * comment
  */
@@ -135,4 +136,19 @@ public abstract class Person {
 		return age;
 
 	}
+	public static void PrintPhone_number(String phone_number) throws
+    PersonException {
+			String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+
+				Pattern pattern = Pattern.compile(regex);
+
+				Matcher matcher = pattern.matcher(phone_number);
+				Matcher valid_matcher = pattern.matcher("(123)-456-7890");
+				if (matcher == valid_matcher) {
+					System.out.println("Phone number is " + phone_number);
+				} else {
+					throw new PersonException(phone_number);
+				}
+		}
+
 }
